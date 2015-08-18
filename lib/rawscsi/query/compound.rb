@@ -70,13 +70,17 @@ module Rawscsi
       end
 
       def facets
-        return nil unless facets_array = query_hash[:facets]
-        output = []
+        return nil unless facets_array = query_hash[:facets].split(',')
         facets_str = ''
+        append_and = facets_array.size > 1
         facets_array.each do |facet|
-          facets_str << "facet.#{facet.to_s}&"
+          if append_and
+            facets_str << "facet.#{facet.to_s}={}&"
+          else
+            facets_str << "facet.#{facet.to_s}={}"
+          end
         end
-        facets_str
+        encode(facets_str)
       end
 
       def fields

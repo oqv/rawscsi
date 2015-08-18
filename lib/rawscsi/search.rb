@@ -1,9 +1,10 @@
-require "httparty"
+require 'httparty'
+require 'uri'
 
 module Rawscsi
   class Search < Base
     def search(arg, options = {})
-      if arg.is_a?(String)  
+      if arg.is_a?(String)
         query = Rawscsi::Query::Simple.new(arg).build
         raw = options[:raw]
       elsif arg.is_a?(Hash)
@@ -49,6 +50,7 @@ module Rawscsi
 
     def send_request_to_aws(query)
       url_query = url(query)
+      url_query = URI.parse(url_query)
       
       signature = if config.access_key_id && config.secret_key
                   Rawscsi::RequestSignature.new({
