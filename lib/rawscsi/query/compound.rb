@@ -70,8 +70,9 @@ module Rawscsi
       end
 
       def facets
-        return nil unless facets_array = query_hash[:facets].split(',')
+        return nil unless facets_array = query_hash[:facets]
         facets_str = ''
+        facets_array = facets_array.split(',')
         append_and = facets_array.size > 1
         facets_array.each do |facet|
           if append_and
