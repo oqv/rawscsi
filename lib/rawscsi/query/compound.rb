@@ -18,6 +18,7 @@ module Rawscsi
           start,
           limit,
           fields,
+          facets,
           "q.parser=structured"
         ].compact.join("&")
       end
@@ -66,6 +67,16 @@ module Rawscsi
       def limit
         return nil unless query_hash[:limit]
         "size=#{query_hash[:limit]}"
+      end
+
+      def facets
+        return nil unless facets_array = query_hash[:facets]
+        output = []
+        facets_str = ''
+        facets_array.each do |facet|
+          facets_str << "facet.#{facet.to_s}&"
+        end
+        facets_str
       end
 
       def fields
