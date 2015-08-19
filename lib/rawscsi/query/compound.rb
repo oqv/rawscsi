@@ -76,9 +76,9 @@ module Rawscsi
         append_and = facets_array.size > 1
         facets_array.each do |facet|
           if append_and
-            facets_str << "facet.#{facet.to_s}={}&"
+            facets_str << "facet.#{facet.to_s}={size: 1000}&"
           else
-            facets_str << "facet.#{facet.to_s}={}"
+            facets_str << "facet.#{facet.to_s}={size: 1000}"
           end
         end
         encode(facets_str)
