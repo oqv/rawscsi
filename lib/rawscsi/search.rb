@@ -49,8 +49,11 @@ module Rawscsi
     end
 
     def send_request_to_aws(query)
+          
       url_query = url(query)
-      url_query = URI.parse(url_query)
+      url_query = URI.parse(URI.encode(URI.decode(url_query.to_s)))
+      # url_query = URI.parse(URI.encode(url_query.to_s))
+      # url_query = URI.parse(url_query)
       
       signature = if config.access_key_id && config.secret_key
                   Rawscsi::RequestSignature.new({
