@@ -75,10 +75,19 @@ module Rawscsi
         facets_array = facets_array.split(',')
         append_and = facets_array.size > 1
         facets_array.each do |facet|
-          if append_and
-            facets_str << "facet.#{facet.to_s}={size: 1000}&"
+          splitted = facet.split(':')
+          key = splitted[0]
+          value = nil
+          if splitted.size > 1
+            value = "{sort: '#{splitted[1].to_s}',size: 1000}"
           else
-            facets_str << "facet.#{facet.to_s}={size: 1000}"
+            value = "{size: 1000}"
+          end
+
+          if append_and
+            facets_str << "facet.#{key.to_s}=#{value}&"
+          else
+            facets_str << "facet.#{key.to_s}=#{value}"
           end
         end
         encode(facets_str)
@@ -95,4 +104,3 @@ module Rawscsi
    end
   end
 end
-
