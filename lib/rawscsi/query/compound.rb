@@ -79,7 +79,7 @@ module Rawscsi
           key = splitted[0]
           value = nil
           if splitted.size > 1
-            value = "{sort: '#{splitted[1].to_s}',size: 1000}"
+            value = "{sort: '#{splitted[1].to_s}',size: 10000}"
           else
             value = "{size: 1000}"
           end
