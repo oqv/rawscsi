@@ -19,6 +19,7 @@ module Rawscsi
           limit,
           fields,
           facets,
+          cursor,
           "q.parser=structured"
         ].compact.join("&")
       end
@@ -100,6 +101,11 @@ module Rawscsi
           output << field_sym.to_s
         end
         "return=" + output.join(",")
+      end
+
+      def cursor
+        return nil unless query_hash[:cursor]
+        "cursor=#{query_hash[:cursor]}"
       end
    end
   end
