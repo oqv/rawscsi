@@ -11,8 +11,8 @@ module Rawscsi
       def build
         [
           query,
+          weights,
           distance,
-          qoptions,
           date,
           sort,
           start,
@@ -55,8 +55,10 @@ module Rawscsi
         "expr.distance=haversin(#{location[:latitude]},#{location[:longitude]},location.latitude,location.longitude)"
       end
 
-      def qoptions
+      def weights
+        byebug
         return nil unless weights = query_hash[:weights]
+        # "q.options=#{URI.decode(CGI.escape(weights.to_s))}"
         "q.options=#{CGI.escape(weights)}"
       end
 

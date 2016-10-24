@@ -13,4 +13,3 @@ module Rawscsi
     end
   end
 end
-
