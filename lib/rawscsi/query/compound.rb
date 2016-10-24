@@ -56,7 +56,6 @@ module Rawscsi
       end
 
       def weights
-        byebug
         return nil unless weights = query_hash[:weights]
         # "q.options=#{URI.decode(CGI.escape(weights.to_s))}"
         "q.options=#{CGI.escape(weights)}"
